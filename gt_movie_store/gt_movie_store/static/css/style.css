@@ -133,25 +133,95 @@
     margin: 0 auto;
 }
 
+/* Footer Styles */
+/* Footer Styles */
 .ms-footer {
-    background-color: #202020;
-  }
-  .ms-footer p {
-    color: #7F7F7F;
-    font-size: 13px;
-  }
-  .ms-footer a:hover {
-    color: #6ab43e;
+    background-color: #1A1A1A;
+    padding: 40px 0;
+    color: #FFF; /* Ensure all text is white */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Footer Section Titles */
+.footer-title {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Footer Text */
+.footer-text {
+    font-size: 14px;
+    color: #FFF; /* Ensure text is white */
+    line-height: 1.6;
+}
+
+/* Footer Links */
+.footer-link {
+    color: #FFF;
     text-decoration: none;
-  }
-  .ms-footer-bottom span{
-    font-size: 13px;
-    line-height: 38px;
-  }
-  .ms-footer-bottom a {
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
     color: #6ab43e;
-    text-decoration: none;
-  }
-  .ms-footer-bottom a:hover {
-    color: #fff;
-  }
+}
+
+/* Footer Contact Info */
+.footer-contact p {
+    font-size: 14px;
+    color: #FFF;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-contact i {
+    margin-right: 8px;
+    color: #6ab43e;
+}
+
+/* Footer Bottom */
+.ms-footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    color: #FFF;
+    font-size: 13px;
+}
+
+/* Remove Bullet Points */
+.footer-links,
+.footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+/* Footer Divider */
+.footer-divider {
+    width: 50px;
+    border-bottom: 2px solid #6ab43e;
+    margin-bottom: 10px;
+}
+
+/* Make Footer Responsive */
+@media (max-width: 768px) {
+    .ms-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ms-footer-bottom div {
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
+
+
