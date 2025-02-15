@@ -1,67 +1,81 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load static %}
 {% load cart_filters %}
 
-<div class="movies-container">
-  <!-- Cart Header Section -->
-  <div class="featured-movie" style="min-height: 40vh;">
-    <div class="featured-backdrop" style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));">
-      <div class="featured-content text-center">
-        <h1>Your Shopping Cart</h1>
-        <p class="lead">Review your selected movies before checkout</p>
-      </div>
-    </div>
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Your Shopping Cart</h1>
+    <p class="lead">Review your selected movies before checkout</p>
   </div>
 
-  <!-- Cart Items Section -->
-  <div class="container-fluid px-4 py-5">
+  <div class="container">
     {% if template_data.movies_in_cart %}
-      <div class="card bg-dark text-white">
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-dark table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Movie</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for movie in template_data.movies_in_cart %}
-                <tr>
-                  <td>{{ movie.id }}</td>
-                  <td>
+      <div class="cart-table">
+        <div class="table-responsive">
+          <table class="table table-dark mb-0">
+            <thead>
+              <tr>
+                <th>Movie</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for movie in template_data.movies_in_cart %}
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img src="{{ movie.image.url }}" alt="{{ movie.name }}" class="cart-movie-image me-3">
                     <a href="{% url 'movies.show' id=movie.id %}" class="text-white text-decoration-none">
                       {{ movie.name }}
                     </a>
-                  </td>
-                  <td>${{ movie.price }}</td>
-                  <td>{{ request.session.cart|get_quantity:movie.id }}</td>
-                  <td>${{ movie.price|multiply:request.session.cart|get_quantity:movie.id }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </td>
+                <td>${{ movie.price }}</td>
+                <td>
+                  <form method="post" action="{% url 'cart.update' id=movie.id %}" class="quantity-form">
+                    {% csrf_token %}
+                    <div class="input-group quantity-input-group">
+                      <button type="button" class="btn btn-dark btn-sm" onclick="decrementQuantity(this)">-</button>
+                      <input type="number" name="quantity" value="{{ request.session.cart|get_quantity:movie.id }}" 
+                             min="1" max="10" class="form-control form-control-sm text-center quantity-input"
+                             onchange="this.form.submit()">
+                      <button type="button" class="btn btn-dark btn-sm" onclick="incrementQuantity(this)">+</button>
+                    </div>
+                  </form>
+                </td>
+                <td>${{ movie.price|multiply:request.session.cart|get_quantity:movie.id }}</td>
+                <td>
+                  <form method="post" action="{% url 'cart.remove' id=movie.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-          <div class="d-flex justify-content-end align-items-center gap-3 mt-4">
-            <h4 class="mb-0">Total: ${{ template_data.cart_total }}</h4>
-            <a href="{% url 'cart.purchase' %}" class="btn btn-primary btn-lg">
-              <i class="fas fa-shopping-cart"></i> Checkout
-            </a>
-            <a href="{% url 'cart.clear' %}" class="btn btn-danger btn-lg">
-              <i class="fas fa-trash"></i> Clear Cart
-            </a>
-          </div>
+      <div class="cart-total">
+        <h4 class="mb-0">Total: ${{ template_data.cart_total }}</h4>
+        <div class="cart-actions">
+          <a href="{% url 'cart.clear' %}" class="btn btn-outline-danger">
+            <i class="fas fa-trash"></i> Clear Cart
+          </a>
+          <a href="{% url 'cart.purchase' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-shopping-cart"></i> Checkout
+          </a>
         </div>
       </div>
     {% else %}
-      <div class="text-center text-white">
-        <i class="fas fa-shopping-cart fa-4x mb-3"></i>
+      <div class="empty-cart">
+        <i class="fas fa-shopping-cart"></i>
         <h3>Your cart is empty</h3>
         <p>Browse our collection and add some movies to your cart!</p>
         <a href="{% url 'movies.index' %}" class="btn btn-primary btn-lg mt-3">
@@ -71,4 +85,22 @@
     {% endif %}
   </div>
 </div>
-{% endblock content %}
+
+<script>
+function incrementQuantity(button) {
+  const input = button.parentElement.querySelector('input');
+  if (input.value < 10) {
+    input.value = parseInt(input.value) + 1;
+    input.form.submit();
+  }
+}
+
+function decrementQuantity(button) {
+  const input = button.parentElement.querySelector('input');
+  if (input.value > 1) {
+    input.value = parseInt(input.value) - 1;
+    input.form.submit();
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="auth-container">
+  <div class="auth-backdrop">
+    <div class="auth-content">
+      <h1 class="auth-title">Sign In</h1>
+      
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post" action="{% url 'authentication.login' %}">
+        {% csrf_token %}
+        <div class="auth-input-group">
+          <input type="email" name="email" class="auth-input" required 
+                 {% if email %}value="{{ email }}"{% endif %}>
+          <label>Email or mobile number</label>
+        </div>
+        <div class="auth-input-group">
+          <input type="password" name="password" class="auth-input" required>
+          <label>Password</label>
+        </div>
+        <button type="submit" class="auth-submit">Sign In</button>
+      </form>
+
+      <div class="auth-divider">OR</div>
+      
+      <button class="auth-code-button">Use a Sign-In Code</button>
+      
+      <a href="{% url 'authentication.forgot_password' %}" class="auth-forgot">Forgot password?</a>
+      
+      <label class="auth-remember">
+        <input type="checkbox" checked>
+        <span>Remember me</span>
+      </label>
+
+      <div class="auth-signup">
+        <span>New to Netflix?</span>
+        <a href="{% url 'authentication.register' %}">Sign up now.</a>
+      </div>
+
+      <div class="auth-recaptcha">
+        This page is protected by Google reCAPTCHA to ensure you're not a bot.
+        <a href="#">Learn more.</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
