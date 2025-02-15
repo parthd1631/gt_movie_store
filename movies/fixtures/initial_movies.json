@@ -36,7 +36,7 @@
             "name": "Captain America: Brave New World",
             "price": 12.99,
             "description": "After meeting with newly elected U.S. President Thaddeus Ross, Sam finds himself in the middle of an international incident. He must discover the reason behind a nefarious global plot before the true mastermind has the entire world seeing red.",
-            "image": "movie_images/Captain_America:_Brave_New_World.jpg"
+            "image": "movie_images/Captain_America_Brave_New_World.jpg"
         }
     },
     {
@@ -96,7 +96,7 @@
             "name": "Sniper: The Last Stand",
             "price": 12.99,
             "description": "To stop an arms dealer from unleashing a deadly superweapon, Ace sniper Brandon Beckett and Agent Zero are deployed to Costa Verde to lead a group of elite soldiers against an unrelenting militia. Taking an untested sniper under his wing, Beckett faces his newest challenge: giving orders instead of receiving them. With both time and ammo running low in a race to save humanity, the team must overcome all odds just to survive.",
-            "image": "movie_images/Sniper:_The_Last_Stand.jpg"
+            "image": "movie_images/Sniper_The_Last_Stand.jpg"
         }
     },
     {
@@ -116,7 +116,7 @@
             "name": "Venom: The Last Dance",
             "price": 12.99,
             "description": "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance.",
-            "image": "movie_images/Venom:_The_Last_Dance.jpg"
+            "image": "movie_images/Venom_The_Last_Dance.jpg"
         }
     },
     {
@@ -136,7 +136,7 @@
             "name": "Mufasa: The Lion King",
             "price": 12.99,
             "description": "Mufasa, a cub lost and alone, meets a sympathetic lion named Taka, the heir to a royal bloodline. The chance meeting sets in motion an expansive journey of a group of misfits searching for their destiny.",
-            "image": "movie_images/Mufasa:_The_Lion_King.jpg"
+            "image": "movie_images/Mufasa_The_Lion_King.jpg"
         }
     },
     {
@@ -146,7 +146,7 @@
             "name": "Devara: Part 1",
             "price": 12.99,
             "description": "Devara, a fearless man from a coastal region, embarks on a perilous journey into the treacherous world of the sea to safeguard the lives of his people. Unbeknownst to him, his brother Bhaira is plotting a conspiracy against him. As events unfold, Devara passes on his legacy to his mild-mannered and timid son, Varada.",
-            "image": "movie_images/Devara:_Part_1.jpg"
+            "image": "movie_images/Devara_Part_1.jpg"
         }
     },
     {
@@ -186,7 +186,7 @@
             "name": "Star Trek: Section 31",
             "price": 12.99,
             "description": "Emperor Philippa Georgiou joins a secret division of Starfleet tasked with protecting the United Federation of Planets and faces the sins of her past.",
-            "image": "movie_images/Star_Trek:_Section_31.jpg"
+            "image": "movie_images/Star_Trek_Section_31.jpg"
         }
     },
     {
