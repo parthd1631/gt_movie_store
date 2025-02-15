@@ -4,6 +4,7 @@ from .forms import CustomUserCreationForm, CustomErrorList
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import UserProfile
 
 @login_required
 def logout(request):
@@ -25,20 +26,23 @@ def login(request):
             return redirect('home.index')
 
 def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            UserProfile.objects.create(
+                user=user,
+                security_question=form.cleaned_data['security_question'],
+                security_answer=form.cleaned_data['security_answer']
+            )
+            auth_login(request, user)
+            return redirect('home.index')
+    else:
+        form = CustomUserCreationForm()
     template_data = {}
     template_data['title'] = 'Sign Up'
-
-    if request.method == 'GET':
-        template_data['form'] = CustomUserCreationForm()
-        return render(request, 'accounts/signup.html', {'template_data': template_data})
-    elif request.method == 'POST':
-        form = CustomUserCreationForm(request.POST, error_class=CustomErrorList)
-        if form.is_valid():
-            form.save()
-            return redirect('accounts.login')
-        else:
-            template_data['form'] = form
-            return render(request, 'accounts/signup.html', {'template_data': template_data})
+    return render(request, 'accounts/signup.html',
+        {'template_data': template_data, 'form': form})
 
 @login_required
 def orders(request):
@@ -47,3 +51,43 @@ def orders(request):
     template_data['orders'] = request.user.order_set.all()
     return render(request, 'accounts/orders.html',
         {'template_data': template_data})
+
+def reset_password(request):
+    if request.method == 'POST':
+        if 'username' in request.POST:
+            # First step: Show security question
+            username = request.POST.get('username')
+            try:
+                user = User.objects.get(username=username)
+                request.session['reset_user_id'] = user.id
+                return render(request, 'accounts/reset_password.html', {
+                    'show_question': True,
+                    'security_question': user.userprofile.security_question
+                })
+            except User.DoesNotExist:
+                return render(request, 'accounts/reset_password.html', {
+                    'error': 'Username not found'
+                })
+        else:
+            # Second step: Verify answer and reset password
+            user_id = request.session.get('reset_user_id')
+            if not user_id:
+                return redirect('accounts.reset_password')
+            
+            user = User.objects.get(id=user_id)
+            security_answer = request.POST.get('security_answer')
+            new_password = request.POST.get('new_password')
+            
+            if user.userprofile.security_answer == security_answer:
+                user.set_password(new_password)
+                user.save()
+                del request.session['reset_user_id']
+                return redirect('accounts.login')
+            else:
+                return render(request, 'accounts/reset_password.html', {
+                    'show_question': True,
+                    'security_question': user.userprofile.security_question,
+                    'error': 'Incorrect answer'
+                })
+    
+    return render(request, 'accounts/reset_password.html', {'show_question': False})
