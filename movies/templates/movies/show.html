@@ -8,16 +8,16 @@
       <!-- Movie Image -->
       <div class="col-lg-6 mb-4">
         <div class="movie-image text-center">
-          <img src="{{ template_data.movie.image.url }}" class="img-fluid rounded shadow" alt="{{ template_data.movie.name }}">
+          <img src="{{ template_data.movie.image.url }}" class="img-fluid rounded shadow-lg hover-effect" alt="{{ template_data.movie.name }}">
         </div>
       </div>
       
       <!-- Movie Details -->
       <div class="col-lg-6">
-        <h1 class="movie-title">{{ template_data.movie.name }}</h1>
+        <h1 class="movie-title display-4 mb-3 text-white">{{ template_data.movie.name }}</h1>
         <div class="movie-details">
-          <p class="movie-description">{{ template_data.movie.description }}</p>
-          <div class="price-tag">${{ template_data.movie.price }}</div>
+          <p class="movie-description lead text-light mb-4">{{ template_data.movie.description }}</p>
+          <div class="price-tag netflix-price mb-4">${{ template_data.movie.price }}</div>
           
           {% if user.is_authenticated %}
           <form method="post" action="{% url 'cart.add' id=template_data.movie.id %}" class="mb-4">
@@ -30,8 +30,8 @@
                 </div>
               </div>
               <div class="col-auto">
-                <button class="btn btn-primary" type="submit">
-                  <i class="fas fa-cart-plus"></i> Add to Cart
+                <button class="btn btn-danger netflix-button" type="submit">
+                  <i class="fas fa-cart-plus me-2"></i> Add to Cart
                 </button>
               </div>
             </div>
@@ -41,28 +41,29 @@
         
         <!-- Reviews Section -->
         <div class="reviews-section mt-5">
-          <h4>Reviews</h4>
+          <h4 class="text-white mb-4">Reviews</h4>
           {% if user.is_authenticated %}
             <form method="post" action="{% url 'movies.create_review' id=template_data.movie.id %}" class="mb-4">
               {% csrf_token %}
               <div class="mb-3">
-                <textarea class="form-control" name="comment" rows="3" placeholder="Share your thoughts about this movie..."></textarea>
+                <textarea class="form-control bg-dark text-light border-dark" name="comment" rows="3" 
+                          placeholder="Share your thoughts about this movie..."></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Submit Review</button>
+              <button type="submit" class="btn btn-danger netflix-button">Submit Review</button>
             </form>
           {% endif %}
           
           <div class="reviews-list">
             {% for review in template_data.reviews %}
-              <div class="card mb-3">
-                <div class="card-body">
-                  <p class="review-text mb-1">{{ review.comment }}</p>
+              <div class="review-card mb-3">
+                <div class="card-body bg-dark text-light rounded p-3">
+                  <p class="review-text mb-2">{{ review.comment }}</p>
                   <small class="text-muted">By {{ review.user.username }} on {{ review.date|date:"F j, Y" }}</small>
                   
                   {% if user == review.user %}
                     <div class="mt-2">
                       <a href="{% url 'movies.edit_review' id=template_data.movie.id review_id=review.id %}" 
-                         class="btn btn-sm btn-outline-primary">Edit</a>
+                         class="btn btn-sm btn-outline-light me-2">Edit</a>
                       <a href="{% url 'movies.delete_review' id=template_data.movie.id review_id=review.id %}" 
                          class="btn btn-sm btn-outline-danger">Delete</a>
                     </div>
@@ -76,4 +77,104 @@
     </div>
   </div>
 </div>
+
+<style>
+.movie-detail-container {
+    background: #141414;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.movie-image img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.movie-image img:hover {
+    transform: scale(1.02);
+}
+
+.movie-title {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.movie-description {
+    color: #cccccc;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.netflix-price {
+    color: #E50914;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 15px 0;
+    padding: 8px 0;
+    border-bottom: 2px solid #E50914;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+.netflix-button {
+    background-color: #E50914;
+    border: none;
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.netflix-button:hover {
+    background-color: #f40612;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+}
+
+.quantity-input {
+    background-color: #2b2b2b;
+    border: 1px solid #404040;
+    color: white;
+}
+
+.quantity-input:focus {
+    background-color: #2b2b2b;
+    border-color: #E50914;
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.review-card {
+    transition: transform 0.2s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-2px);
+}
+
+.reviews-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.reviews-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.reviews-list::-webkit-scrollbar-track {
+    background: #141414;
+}
+
+.reviews-list::-webkit-scrollbar-thumb {
+    background: #E50914;
+    border-radius: 4px;
+}
+
+.reviews-list::-webkit-scrollbar-thumb:hover {
+    background: #f40612;
+}
+</style>
 {% endblock %}

@@ -41,12 +41,12 @@
                       <button type="button" class="btn btn-dark btn-sm" onclick="decrementQuantity(this)">-</button>
                       <input type="number" name="quantity" value="{{ request.session.cart|get_quantity:movie.id }}" 
                              min="1" max="10" class="form-control form-control-sm text-center quantity-input"
-                             onchange="this.form.submit()">
+                             onchange="handleQuantityChange(this)">
                       <button type="button" class="btn btn-dark btn-sm" onclick="incrementQuantity(this)">+</button>
                     </div>
                   </form>
                 </td>
-                <td>${{ movie.price|multiply:request.session.cart|get_quantity:movie.id }}</td>
+                <td class="item-total">${{ movie.price|multiply:request.session.cart|get_quantity:movie.id }}</td>
                 <td>
                   <form method="post" action="{% url 'cart.remove' id=movie.id %}" class="d-inline">
                     {% csrf_token %}
@@ -63,7 +63,7 @@
       </div>
 
       <div class="cart-total">
-        <h4 class="mb-0">Total: ${{ template_data.cart_total }}</h4>
+        <h4 class="mb-0">Total: $<span id="cartTotal">{{ template_data.cart_total }}</span></h4>
         <div class="cart-actions">
           <a href="{% url 'cart.clear' %}" class="btn btn-outline-danger">
             <i class="fas fa-trash"></i> Clear Cart
@@ -87,20 +87,69 @@
 </div>
 
 <script>
-function incrementQuantity(button) {
-  const input = button.parentElement.querySelector('input');
-  if (input.value < 10) {
-    input.value = parseInt(input.value) + 1;
-    input.form.submit();
+  // NEW FUNCTION
+  function initializeItemTotals() {
+    document.querySelectorAll('.quantity-input').forEach(input => {
+      updateItemTotal(input);
+    });
+    updateCartTotal();
   }
-}
-
-function decrementQuantity(button) {
-  const input = button.parentElement.querySelector('input');
-  if (input.value > 1) {
-    input.value = parseInt(input.value) - 1;
-    input.form.submit();
+  
+  function updateCartTotal() {
+    let total = 0;
+    document.querySelectorAll('.item-total').forEach(cell => {
+      total += parseFloat(cell.textContent.replace('$', ''));
+    });
+    document.getElementById('cartTotal').textContent = total.toFixed(2);
   }
-}
-</script>
+  
+  function updateItemTotal(input) {
+    const row = input.closest('tr');
+    const price = parseFloat(row.querySelector('td:nth-child(2)').textContent.replace('$', ''));
+    const quantity = parseInt(input.value);
+    const itemTotal = (price * quantity).toFixed(2);
+    row.querySelector('.item-total').textContent = '$' + itemTotal;
+  }
+  
+  async function handleQuantityChange(input) {
+    const form = input.closest('form');
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+        }
+      });
+      
+      if (response.ok) {
+        updateItemTotal(input);
+        updateCartTotal();
+      }
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
+  }
+  
+  function incrementQuantity(button) {
+    const input = button.parentElement.querySelector('input');
+    if (input.value < 10) {
+      input.value = parseInt(input.value) + 1;
+      handleQuantityChange(input);
+    }
+  }
+  
+  function decrementQuantity(button) {
+    const input = button.parentElement.querySelector('input');
+    if (input.value > 1) {
+      input.value = parseInt(input.value) - 1;
+      handleQuantityChange(input);
+    }
+  }
+  
+  // NEW LINE
+  document.addEventListener('DOMContentLoaded', initializeItemTotals);
+  </script>
 {% endblock %}

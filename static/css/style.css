@@ -1,0 +1,137 @@
+/* Navbar Styles */
+.navbar {
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.brand-text {
+    color: #E50914;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 8px 15px !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #E50914 !important;
+}
+
+.dropdown-menu {
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.dropdown-item {
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(229, 9, 20, 0.1);
+    color: #E50914;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #141414;
+    color: #fff;
+    padding: 60px 0 20px;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-heading {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-text {
+    color: #999;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #E50914;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #E50914;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: #666;
+}
+
+/* Main Content Padding */
+main {
+    padding-top: 76px; /* Adjust based on navbar height */
+    min-height: calc(100vh - 200px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 0;
+    }
+    
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .social-links {
+        margin-bottom: 20px;
+    }
+}
+
+/* Utility Classes */
+.text-netflix {
+    color: #E50914;
+}
+
+.bg-netflix {
+    background-color: #E50914;
+}

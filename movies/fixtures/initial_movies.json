@@ -1,0 +1,202 @@
+[
+    {
+        "model": "movies.movie",
+        "pk": 1,
+        "fields": {
+            "name": "Moana 2",
+            "price": 12.99,
+            "description": "After receiving an unexpected call from her wayfinding ancestors, Moana journeys alongside Maui and a new crew to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.",
+            "image": "movie_images/Moana_2.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 2,
+        "fields": {
+            "name": "Sonic the Hedgehog 3",
+            "price": 12.99,
+            "description": "Sonic, Knuckles, and Tails reunite against a powerful new adversary, Shadow, a mysterious villain with powers unlike anything they have faced before. With their abilities outmatched in every way, Team Sonic must seek out an unlikely alliance in hopes of stopping Shadow and protecting the planet.",
+            "image": "movie_images/Sonic_the_Hedgehog_3.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 3,
+        "fields": {
+            "name": "Panda Plan",
+            "price": 12.99,
+            "description": "International action star Jackie Chan is invited to the adoption ceremony of a rare baby panda, but after an international crime syndicate attempts to kidnap the bear, Jackie has to save the bear using his stunt work skills.",
+            "image": "movie_images/Panda_Plan.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 4,
+        "fields": {
+            "name": "Captain America: Brave New World",
+            "price": 12.99,
+            "description": "After meeting with newly elected U.S. President Thaddeus Ross, Sam finds himself in the middle of an international incident. He must discover the reason behind a nefarious global plot before the true mastermind has the entire world seeing red.",
+            "image": "movie_images/Captain_America:_Brave_New_World.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 5,
+        "fields": {
+            "name": "Kraven the Hunter",
+            "price": 12.99,
+            "description": "Kraven Kravinoff's complex relationship with his ruthless gangster father, Nikolai, starts him down a path of vengeance with brutal consequences, motivating him to become not only the greatest hunter in the world, but also one of its most feared.",
+            "image": "movie_images/Kraven_the_Hunter.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 6,
+        "fields": {
+            "name": "Amaran",
+            "price": 12.99,
+            "description": "A heroic true story of Major Mukund Varadarajan, an Indian Army officer who displayed extraordinary bravery during a counterterrorism mission in Kashmir\u2019s Shopian district. The film captures his courage in protecting his nation and the devotion of his wife Indhu Rebecaa Varghese.",
+            "image": "movie_images/Amaran.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 7,
+        "fields": {
+            "name": "Wolf Man",
+            "price": 12.99,
+            "description": "With his marriage fraying, Blake persuades his wife Charlotte to take a break from the city and visit his remote childhood home in rural Oregon. As they arrive at the farmhouse in the dead of night, they're attacked by an unseen animal and barricade themselves inside the home as the creature prowls the perimeter. But as the night stretches on, Blake begins to behave strangely, transforming into something unrecognizable.",
+            "image": "movie_images/Wolf_Man.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 8,
+        "fields": {
+            "name": "Alarum",
+            "price": 12.99,
+            "description": "Two married spies caught in the crosshairs of an international intelligence network will stop at nothing to obtain a critical asset. Joe and Lara are agents living off the grid whose quiet retreat at a winter resort is blown to shreds when members of the old guard suspect the two may have joined an elite team of rogue spies, known as Alarum.",
+            "image": "movie_images/Alarum.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 9,
+        "fields": {
+            "name": "Back in Action",
+            "price": 12.99,
+            "description": "Fifteen years after vanishing from the CIA to start a family, elite spies Matt and Emily jump back into the world of espionage when their cover is blown.",
+            "image": "movie_images/Back_in_Action.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 10,
+        "fields": {
+            "name": "Sniper: The Last Stand",
+            "price": 12.99,
+            "description": "To stop an arms dealer from unleashing a deadly superweapon, Ace sniper Brandon Beckett and Agent Zero are deployed to Costa Verde to lead a group of elite soldiers against an unrelenting militia. Taking an untested sniper under his wing, Beckett faces his newest challenge: giving orders instead of receiving them. With both time and ammo running low in a race to save humanity, the team must overcome all odds just to survive.",
+            "image": "movie_images/Sniper:_The_Last_Stand.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 11,
+        "fields": {
+            "name": "The Island",
+            "price": 12.99,
+            "description": "When his brother is killed, LAPD officer Mark leaves the city to return to the island he grew up on. Seeking answers and ultimately vengeance, he soon finds himself in a bloody battle with the corrupt tycoon who's taken over the island paradise.",
+            "image": "movie_images/The_Island.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 12,
+        "fields": {
+            "name": "Venom: The Last Dance",
+            "price": 12.99,
+            "description": "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance.",
+            "image": "movie_images/Venom:_The_Last_Dance.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 13,
+        "fields": {
+            "name": "Gladiator II",
+            "price": 12.99,
+            "description": "Years after witnessing the death of the revered hero Maximus at the hands of his uncle, Lucius is forced to enter the Colosseum after his home is conquered by the tyrannical Emperors who now lead Rome with an iron fist. With rage in his heart and the future of the Empire at stake, Lucius must look to his past to find strength and honor to return the glory of Rome to its people.",
+            "image": "movie_images/Gladiator_II.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 14,
+        "fields": {
+            "name": "Mufasa: The Lion King",
+            "price": 12.99,
+            "description": "Mufasa, a cub lost and alone, meets a sympathetic lion named Taka, the heir to a royal bloodline. The chance meeting sets in motion an expansive journey of a group of misfits searching for their destiny.",
+            "image": "movie_images/Mufasa:_The_Lion_King.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 15,
+        "fields": {
+            "name": "Devara: Part 1",
+            "price": 12.99,
+            "description": "Devara, a fearless man from a coastal region, embarks on a perilous journey into the treacherous world of the sea to safeguard the lives of his people. Unbeknownst to him, his brother Bhaira is plotting a conspiracy against him. As events unfold, Devara passes on his legacy to his mild-mannered and timid son, Varada.",
+            "image": "movie_images/Devara:_Part_1.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 16,
+        "fields": {
+            "name": "Nosferatu",
+            "price": 12.99,
+            "description": "A gothic tale of obsession between a haunted young woman and the terrifying vampire infatuated with her, causing untold horror in its wake.",
+            "image": "movie_images/Nosferatu.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 17,
+        "fields": {
+            "name": "Le clitoris",
+            "price": 12.99,
+            "description": "Women are lucky, they get to have the only organ in the human body dedicated exclusively for pleasure: the clitoris! In this humorous and instructive animated documentary, find out its unrecognized anatomy and its unknown herstory.",
+            "image": "movie_images/Le_clitoris.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 18,
+        "fields": {
+            "name": "Kinda Pregnant",
+            "price": 12.99,
+            "description": "When Lainy's plan to settle down and start a family falls apart, she puts on a fake baby bump, tells a lie \u2014 and accidentally falls for her dream guy.",
+            "image": "movie_images/Kinda_Pregnant.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 19,
+        "fields": {
+            "name": "Star Trek: Section 31",
+            "price": 12.99,
+            "description": "Emperor Philippa Georgiou joins a secret division of Starfleet tasked with protecting the United Federation of Planets and faces the sins of her past.",
+            "image": "movie_images/Star_Trek:_Section_31.jpg"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 20,
+        "fields": {
+            "name": "Werewolves",
+            "price": 12.99,
+            "description": "A year after a supermoon\u2019s light activated a dormant gene, transforming humans into bloodthirsty werewolves and causing nearly a billion deaths, the nightmare resurfaces as the supermoon rises again. Two scientists attempt to stop the mutation but fail and must now struggle to reach one of their family homes.",
+            "image": "movie_images/Werewolves.jpg"
+        }
+    }
+]

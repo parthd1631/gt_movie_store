@@ -4,61 +4,249 @@
 
 <!-- Hero Section -->
 <div class="hero-section">
-  <div class="hero-content">
-    <h1>Welcome to GT Movies</h1>
-    <p class="lead">Discover and purchase your favorite movies</p>
-    <a href="{% url 'movies.index' %}" class="btn btn-light btn-lg">Browse Movies</a>
+  <div class="featured-movie">
+    <div class="featured-backdrop" {% if template_data.featured_movie %}style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('{{ template_data.featured_movie.image.url }}') no-repeat center center; background-size: cover;"{% endif %}>
+      <div class="featured-content">
+        <h1 class="featured-title">{{ template_data.featured_movie.name|default:"Discover Movies" }}</h1>
+        {% if template_data.featured_movie %}
+        <div class="featured-buttons">
+          <a href="{% url 'movies.show' template_data.featured_movie.id %}" class="btn btn-light btn-lg me-3">
+            <i class="fas fa-info-circle"></i> More Info
+          </a>
+          <a href="{% url 'cart.add' id=template_data.featured_movie.id %}" class="btn btn-danger btn-lg netflix-button">
+            <i class="fas fa-shopping-cart"></i> Buy Now
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Featured Movies Section -->
-<div class="container-fluid movie-section">
-  <h2 class="section-title">Featured Movies</h2>
-  <div class="row movie-row">
-    {% for movie in template_data.movies %}
-    <div class="col-6 col-md-4 col-lg-3 mb-4">
-      <div class="movie-card">
-        <div class="movie-poster">
-          <img src="{{ movie.image.url }}" alt="{{ movie.name }}">
-          <div class="movie-overlay">
+<!-- Movie Categories -->
+<div class="movie-categories">
+  <!-- Trending Now -->
+  <div class="movie-row">
+    <h2 class="category-title">Trending Now</h2>
+    <div class="movie-slider">
+      {% for movie in template_data.movies|slice:":6" %}
+        <div class="movie-card">
+          <a href="{% url 'movies.show' movie.id %}" class="movie-link">
+            <img src="{{ movie.image.url }}" alt="{{ movie.name }}" class="movie-poster">
             <div class="movie-info">
               <h3>{{ movie.name }}</h3>
-              <p>${{ movie.price }}</p>
-              <a href="{% url 'movies.show' id=movie.id %}" class="btn btn-light">View Details</a>
+              <p class="price">${{ movie.price }}</p>
             </div>
-          </div>
+          </a>
         </div>
-      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+  </div>
+
+  <!-- Popular Movies -->
+  <div class="movie-row">
+    <h2 class="category-title">Popular on GT Movies</h2>
+    <div class="movie-slider">
+      {% for movie in template_data.movies|slice:"6:12" %}
+        <div class="movie-card">
+          <a href="{% url 'movies.show' movie.id %}" class="movie-link">
+            <img src="{{ movie.image.url }}" alt="{{ movie.name }}" class="movie-poster">
+            <div class="movie-info">
+              <h3>{{ movie.name }}</h3>
+              <p class="price">${{ movie.price }}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
-<!-- Categories Section -->
-<div class="container-fluid category-section">
-  <h2 class="section-title">Browse by Category</h2>
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <div class="category-card action">
-        <div class="category-overlay">
-          <h3>Action</h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="category-card comedy">
-        <div class="category-overlay">
-          <h3>Comedy</h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="category-card drama">
-        <div class="category-overlay">
-          <h3>Drama</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<style>
+body {
+    background-color: #141414;
+    color: white;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-backdrop {
+    height: 100%;
+    background-position: center !important;
+    background-size: cover !important;
+    position: relative;
+}
+
+.featured-backdrop::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(transparent, #141414);
+}
+
+.featured-content {
+    position: absolute;
+    bottom: 25%;
+    left: 5%;
+    max-width: 600px;
+    z-index: 2;
+}
+
+.featured-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: fadeInUp 1s ease-out;
+}
+
+.featured-buttons {
+    animation: fadeInUp 1s ease-out 0.3s;
+    animation-fill-mode: both;
+}
+
+.netflix-button {
+    background-color: #E50914;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.netflix-button:hover {
+    background-color: #f40612;
+    transform: scale(1.05);
+}
+
+/* Movie Categories */
+.movie-categories {
+    padding: 20px 40px;
+    margin-top: -100px;
+    position: relative;
+    z-index: 3;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #e5e5e5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.movie-row {
+    margin-bottom: 50px;
+}
+
+.movie-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 20px 0;
+    scrollbar-width: none;
+}
+
+.movie-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* Movie Cards */
+.movie-card {
+    flex: 0 0 auto;
+    width: 240px;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.movie-poster {
+    width: 240px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95));
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.movie-card:hover .movie-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.movie-info h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.movie-info .price {
+    color: #E50914;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.movie-link {
+    text-decoration: none;
+    color: white;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .featured-title {
+        font-size: 3rem;
+    }
+    
+    .movie-categories {
+        padding: 20px;
+    }
+    
+    .movie-card {
+        width: 180px;
+    }
+    
+    .movie-poster {
+        width: 180px;
+        height: 270px;
+    }
+}
+</style>
 {% endblock %}

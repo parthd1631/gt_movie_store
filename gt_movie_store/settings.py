@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from croniter import croniter
+from datetime import datetime
+import pytz
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     'movies',
     'accounts',
     'cart',
+    'django_crontab',
+    
 ]
 
 MIDDLEWARE = [
@@ -128,9 +133,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'gt_movie_store' / 'static',
 ]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Email Configuration
@@ -140,3 +145,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your-email@gmail.com'  # Replace with your email
 EMAIL_HOST_PASSWORD = 'your-app-password'  # Replace with your app password
+
+CRONJOBS = [
+    ('0 0 */3 * *', 'movies.management.commands.fetch_movies.Command.handle')  # Runs every 3 days at midnight
+]
+
+base = datetime.now(pytz.timezone('UTC'))
+cron = croniter('0 0 */3 * *', base)
+next_run = cron.get_next(datetime)
+print(f"Next run will be at: {next_run}")

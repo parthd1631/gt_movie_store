@@ -9,7 +9,6 @@
       <div class="featured-content">
         {% if template_data.featured_movie %}
           <h1>{{ template_data.featured_movie.name }}</h1>
-          <p class="lead mb-4">{{ template_data.featured_movie.description|truncatewords:30 }}</p>
         {% else %}
           <h1>Discover Amazing Movies</h1>
           <p class="lead mb-4">Browse our collection of premium titles</p>
