@@ -1,6 +1,234 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends "base.html" %}
 {% load static %}
+{% block content %}
+<style>
+  /* Google Fonts for a modern look */
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
+
+  body {
+    font-family: 'Rubik', sans-serif;
+    background-color: #141414;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hero Section with Animated Gradient Overlay */
+  .about-hero {
+    position: relative;
+    padding: 100px 0;
+    text-align: center;
+    /* Use the red & black geometric background image below */
+    background: url('{% static "img/red&black.jpg" %}') center/cover no-repeat;
+    overflow: hidden;
+  }
+
+  .about-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Animated multi-color gradient overlay */
+    background: linear-gradient(-45deg,
+      rgba(229, 9, 20, 0.7),
+      rgba(20, 20, 20, 0.7),
+      rgba(229, 9, 20, 0.7),
+      rgba(50, 50, 50, 0.7)
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .about-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: fadeInDown 1.5s forwards;
+    opacity: 0;
+  }
+  .about-hero p.lead {
+    font-size: 1.3rem;
+    animation: fadeInUp 1.5s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  /* Team Section */
+  .team-section {
+    padding: 50px 0;
+    background-color: #1a1a1a;
+    animation: fadeIn 1.5s forwards;
+  }
+
+  .team-card {
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    min-height: 250px;
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .team-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .role-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #E50914;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .role {
+    color: #E50914;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .description {
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  /* Project Section */
+  .project-section {
+    padding: 80px 0;
+    background-color: #141414;
+  }
+
+  .info-card {
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    height: 100%;
+    transition: transform 0.3s ease;
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+  }
+  .info-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .info-card i {
+    font-size: 2.5rem;
+    color: #E50914;
+    margin-bottom: 20px;
+  }
+
+  /* Features Section */
+  .features-section {
+    padding: 80px 0;
+    background-color: #1a1a1a;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .feature-item {
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .feature-item:hover {
+    transform: translateY(-5px);
+    background: #3a3a3a;
+  }
+
+  .feature-item i {
+    font-size: 2.5rem;
+    color: #E50914;
+    margin-bottom: 20px;
+  }
+
+  /* Headings */
+  h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #e5e5e5;
+  }
+
+  h3 {
+    margin: 20px 0 10px;
+    font-weight: 600;
+  }
+
+  /* Keyframes for fade-in animations */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .team-card, .info-card, .feature-item {
+      margin-bottom: 20px;
+    }
+  }
+</style>
 
 <div class="about-container">
     <!-- Hero Section -->
@@ -114,146 +342,6 @@
             </div>
         </div>
     </div>
+
 </div>
-
-<style>
-.about-container {
-    background-color: #141414;
-    color: #ffffff;
-}
-
-.about-hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{% static "img/hero-bg.jpg" %}') center/cover;
-    padding: 100px 0;
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.about-hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.team-section {
-    padding: 50px 0;
-    background-color: #1a1a1a;
-}
-
-.team-card {
-    background: #2a2a2a;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s ease;
-    min-height: 250px;
-}
-
-.team-card:hover {
-    transform: translateY(-10px);
-}
-
-.role-badge {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #E50914;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.project-section {
-    padding: 80px 0;
-    background-color: #141414;
-}
-
-.info-card {
-    background: #2a2a2a;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    height: 100%;
-    transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-    transform: translateY(-5px);
-}
-
-.info-card i {
-    font-size: 2.5rem;
-    color: #E50914;
-    margin-bottom: 20px;
-}
-
-.features-section {
-    padding: 80px 0;
-    background-color: #1a1a1a;
-}
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.feature-item {
-    background: #2a2a2a;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.feature-item:hover {
-    transform: translateY(-5px);
-    background: #3a3a3a;
-}
-
-.feature-item i {
-    font-size: 2.5rem;
-    color: #E50914;
-    margin-bottom: 20px;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-weight: 700;
-    color: #e5e5e5;
-}
-
-h3 {
-    margin: 20px 0 10px;
-    font-weight: 600;
-}
-
-.role {
-    color: #E50914;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.description {
-    color: #999;
-    font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-    .about-hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .team-card, .info-card, .feature-item {
-        margin-bottom: 20px;
-    }
-}
-</style>
-{% endblock %}
+{% endblock content %}
