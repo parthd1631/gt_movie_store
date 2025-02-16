@@ -1,29 +1,66 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="p-3 mt-4">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card shadow p-3 mb-4 rounded">
-          <div class="card-body">
-            <h2>Sign Up</h2>
-            <hr />
-            <form method="post">
-              {% csrf_token %}
-              {% for field in form %}
-              <div class="mb-3">
-                <label class="form-label">{{ field.label }}</label>
-                {{ field }}
-                {% if field.errors %}
-                <div class="alert alert-danger">
-                  {{ field.errors }}
-                </div>
-                {% endif %}
-              </div>
-              {% endfor %}
-              <button type="submit" class="btn bg-dark text-white">Sign Up</button>
-            </form>
-          </div>
+<style>
+  .form-container {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-align: center;
+  }
+  .form-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  .form-control {
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+  }
+  .form-button {
+    padding: 14px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+  }
+  .form-button:hover {
+    background-color: #E50914;
+    color: #fff;
+  }
+  .link-button {
+    font-size: 1rem;
+    color: #bbb;
+    transition: color 0.3s;
+  }
+  .link-button:hover {
+    color: #E50914;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="form-container">
+        <h2 class="form-title">Create Your Account</h2>
+        <form method="post">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="mb-3">
+              <label class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div class="alert alert-danger">{{ field.errors }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary w-100 form-button">Sign Up</button>
+        </form>
+        <div class="mt-4">
+          <a href="{% url 'accounts.login' %}" class="link-button">Already have an account? Log in</a>
         </div>
       </div>
     </div>
