@@ -10,6 +10,7 @@ class CustomErrorList(ErrorList):
             return ''
         return mark_safe(''.join([ f'<div class="alert alert-danger" role="alert">{e}</div>' for e in self]))
 
+
 class CustomUserCreationForm(UserCreationForm):
     security_question = forms.CharField(max_length=255, required=True)
     security_answer = forms.CharField(max_length=255, required=True)
@@ -20,7 +21,7 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.error_class = CustomErrorList
-        for fieldname in ['username', 'password1',
+        for fieldname in ['username', 'email', 'password1',
         'password2', 'security_question', 'security_answer']:
             self.fields[fieldname].help_text = None
             self.fields[fieldname].widget.attrs.update(
