@@ -26,7 +26,7 @@ class Command(BaseCommand):
             image_url = f"https://image.tmdb.org/t/p/original{poster_path}"
             
             # Download image
-            image_name = f"movie_images/{m.title.replace(' ', '_')}.jpg"
+            image_name = f"movie_images/{m.title.replace(' ', '_').replace(':', '_')}.jpg"
             response = requests.get(image_url)
             
             # Save image
