@@ -130,6 +130,7 @@
   .movie-gallery {
     padding: 60px 5%;
     display: grid;
+    place-content: center;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 30px;
     background-color: #141414;
@@ -138,6 +139,7 @@
   }
   .movie-card {
     background: #1f1f1f;
+    place-content: center;
     border-radius: 15px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.5);
     overflow: hidden;
@@ -210,7 +212,7 @@
 <!-- MOVIE GALLERY -->
 <h2 class="featured-subtitle" style="text-align:center; margin:40px 0; font-size:2.2rem; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Trending Movies</h2>
 <div class="movie-gallery">
-  {% for movie in template_data.movies|slice:":6" %}
+  {% for movie in template_data.movies|slice:":5" %}
     <div class="movie-card">
       <img src="{{ movie.image.url }}" alt="{{ movie.name }}">
       <div class="movie-card-content">
